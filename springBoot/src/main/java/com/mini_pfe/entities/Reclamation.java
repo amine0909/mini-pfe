@@ -21,23 +21,20 @@ public class Reclamation {
     @Column(name = "DATE_CREATION")
     private Date dateCreation;
 
-
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "MAT_ID")
-    @JsonBackReference
     private Materiel materiel;
 
+    @JsonManagedReference
     @ManyToOne
-    @JoinColumn(name = "USER_ID")
-    @JsonBackReference
+    @JoinColumn(name = "CHEF_DEP_ID")
     private ChefDepartement chefDepartement;
 
 
-    @OneToMany(mappedBy = "reclamation")
     @JsonManagedReference
+    @OneToMany(mappedBy = "reclamation")
     private Collection<Intervention> interventions;
-
-
 
 
     public Materiel getMateriel() {

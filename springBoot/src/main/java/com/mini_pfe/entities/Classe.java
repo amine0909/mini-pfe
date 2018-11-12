@@ -52,14 +52,13 @@ public class Classe {
     }
 
 
-
+    @JsonBackReference
     @OneToMany(mappedBy = "classe")
-    @JsonManagedReference
     private Collection<Materiel> materiels;
 
     @ManyToOne
     @JoinColumn(name = "DEP_ID")
-    @JsonBackReference
+    @JsonManagedReference
     private Departement departement;
 
     public Classe() {}

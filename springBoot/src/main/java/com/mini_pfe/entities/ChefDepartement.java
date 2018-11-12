@@ -6,21 +6,21 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.lang.annotation.Inherited;
 import java.util.Collection;
 import java.util.Set;
 
 @Entity
 @DiscriminatorValue("CHEF_DEP")
-public class ChefDepartement extends  User{
+public class ChefDepartement extends  User {
 
     @OneToOne
     @JoinColumn(name = "DEP_ID")
-    @JsonBackReference
+    @JsonManagedReference
     private Departement departement;
 
-    @OneToMany
-    @JoinColumn(name = "chefDepartement")
-    @JsonManagedReference
+    @JsonBackReference
+    @OneToMany(mappedBy = "chefDepartement")
     private Collection<Reclamation> reclamations;
 
     public ChefDepartement() {}

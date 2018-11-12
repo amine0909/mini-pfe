@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.mini_pfe.entities.enums.Categorie;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -44,12 +45,12 @@ public class Materiel {
 
     @ManyToOne
     @JoinColumn(name="CLASS_ID")
-    @JsonBackReference
+    @JsonManagedReference
     private Classe classe;
 
 
     @OneToMany(mappedBy = "materiel")
-    @JsonManagedReference
+    @JsonBackReference
     private Collection<Reclamation> reclamations;
 
 

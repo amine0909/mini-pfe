@@ -1,7 +1,9 @@
 package com.mini_pfe.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.mini_pfe.entities.enums.DepartementName;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -32,13 +34,15 @@ public class Departement {
     private Long id;
 
     @Column(name="NOM",nullable = false)
-    private String nom;
+    @Enumerated(EnumType.STRING)
+    private DepartementName nom;
 
+    @JsonBackReference
     @OneToOne(mappedBy = "departement")
     private ChefDepartement chef;
 
     @OneToMany(mappedBy = "departement")
-    @JsonManagedReference
+    @JsonBackReference
     private Collection<Classe> classes;
 
     public Departement() {}
@@ -51,11 +55,11 @@ public class Departement {
         this.id = id;
     }
 
-    public String getNom() {
+    public DepartementName getNom() {
         return nom;
     }
 
-    public void setNom(String nom) {
+    public void setNom(DepartementName nom) {
         this.nom = nom;
     }
 }

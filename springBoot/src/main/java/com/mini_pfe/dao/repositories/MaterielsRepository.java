@@ -17,6 +17,8 @@ public interface MaterielsRepository extends JpaRepository<Materiel, Long> {
     List<Materiel> findMateriels(long user_id);
 
 
+
+
     List<Materiel> findById(long id);
     List<Materiel> findAll();
 }

@@ -18,6 +18,7 @@ public abstract class User {
 
     @Column(name="PRENOM")
     private String prenom;
+
     @Column(name="EMAIL")
     private String email;
 
@@ -26,8 +27,6 @@ public abstract class User {
 
     @Column(name = "PASSWORD")
     private String password;
-
-
 
     public User() {}
 
