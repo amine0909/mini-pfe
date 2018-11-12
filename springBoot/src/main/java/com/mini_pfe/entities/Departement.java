@@ -1,6 +1,8 @@
 package com.mini_pfe.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -36,6 +38,7 @@ public class Departement {
     private ChefDepartement chef;
 
     @OneToMany(mappedBy = "departement")
+    @JsonManagedReference
     private Collection<Classe> classes;
 
     public Departement() {}

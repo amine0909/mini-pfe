@@ -1,6 +1,9 @@
 package com.mini_pfe.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
@@ -17,6 +20,25 @@ public class Reclamation {
     @Temporal(TemporalType.DATE)
     @Column(name = "DATE_CREATION")
     private Date dateCreation;
+
+
+    @ManyToOne
+    @JoinColumn(name = "MAT_ID")
+    @JsonBackReference
+    private Materiel materiel;
+
+    @ManyToOne
+    @JoinColumn(name = "USER_ID")
+    @JsonBackReference
+    private ChefDepartement chefDepartement;
+
+
+    @OneToMany(mappedBy = "reclamation")
+    @JsonManagedReference
+    private Collection<Intervention> interventions;
+
+
+
 
     public Materiel getMateriel() {
         return materiel;
@@ -42,17 +64,7 @@ public class Reclamation {
         this.interventions = interventions;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "MAT_ID")
-    private Materiel materiel;
 
-    @ManyToOne
-    @JoinColumn(name = "USER_ID")
-    private ChefDepartement chefDepartement;
-
-
-    @OneToMany(mappedBy = "reclamation")
-    private Collection<Intervention> interventions;
 
 
     public Reclamation() { }

@@ -1,6 +1,8 @@
 package com.mini_pfe.entities;
 
 
+import com.fasterxml.jackson.annotation.*;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -31,9 +33,11 @@ public class Classe {
         this.nom = nom;
     }
 
+
     public Collection<Materiel> getMateriels() {
         return materiels;
     }
+
 
     public void setMateriels(Collection<Materiel> materiels) {
         this.materiels = materiels;
@@ -47,11 +51,15 @@ public class Classe {
         this.departement = departement;
     }
 
+
+
     @OneToMany(mappedBy = "classe")
+    @JsonManagedReference
     private Collection<Materiel> materiels;
 
     @ManyToOne
     @JoinColumn(name = "DEP_ID")
+    @JsonBackReference
     private Departement departement;
 
     public Classe() {}

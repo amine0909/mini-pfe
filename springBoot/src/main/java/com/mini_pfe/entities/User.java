@@ -27,6 +27,8 @@ public abstract class User {
     @Column(name = "PASSWORD")
     private String password;
 
+
+
     public User() {}
 
     public Long getId() {

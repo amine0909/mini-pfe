@@ -1,12 +1,20 @@
 package com.mini_pfe.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
 
 @Entity
 @Table(name="MATERIELS")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Materiel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +42,19 @@ public class Materiel {
     @Column(name = "DATE_ACHAT")
     private Date dateAchat;
 
+    @ManyToOne
+    @JoinColumn(name="CLASS_ID")
+    @JsonBackReference
+    private Classe classe;
+
+
+    @OneToMany(mappedBy = "materiel")
+    @JsonManagedReference
+    private Collection<Reclamation> reclamations;
+
+
+
+
     public Collection<Reclamation> getReclamations() {
         return reclamations;
     }
@@ -50,12 +71,9 @@ public class Materiel {
         this.classe = classe;
     }
 
-    @OneToMany(mappedBy = "materiel")
-    private Collection<Reclamation> reclamations;
 
-    @ManyToOne
-    @JoinColumn(name="CLASS_ID")
-    private Classe classe;
+
+
 
     public Materiel() {}
 
