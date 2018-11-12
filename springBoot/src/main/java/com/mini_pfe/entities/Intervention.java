@@ -1,6 +1,9 @@
 package com.mini_pfe.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -37,11 +40,13 @@ public class Intervention {
 
     @ManyToOne
     @JoinColumn(name = "REC_ID")
+    @JsonBackReference
     private Reclamation reclamation;
 
 
     @ManyToOne
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn(name = "TECHNI_ID")
+    @JsonManagedReference
     private Technicien technicien;
 
     public Intervention() {}

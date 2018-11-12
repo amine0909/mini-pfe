@@ -1,4 +1,4 @@
-package com.mini_pfe.entities;
+package com.mini_pfe.entities.enums;
 
 public enum Categorie {
     EQUIPEMENT_RESAU("EQUIPEMENT_RESAU"),

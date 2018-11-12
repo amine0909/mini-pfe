@@ -1,6 +1,10 @@
 package com.mini_pfe.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.mini_pfe.entities.enums.WorkType;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -8,7 +12,8 @@ import java.util.List;
 @DiscriminatorValue("TECH")
 public class Technicien extends User {
     @Column(name="TYPE_TRAVAIL")
-    private String typeTravail;
+    @Enumerated(EnumType.STRING)
+    private WorkType typeTravail;
 
     public List<Intervention> getInterventions() {
         return interventions;
@@ -20,14 +25,15 @@ public class Technicien extends User {
 
     public Technicien() {}
 
-    public String getTypeTravail() {
+    public WorkType getTypeTravail() {
         return typeTravail;
     }
 
+    @JsonBackReference
     @OneToMany(mappedBy = "technicien")
     private List<Intervention> interventions;
 
-    public void setTypeTravail(String typeTravail) {
+    public void setTypeTravail(WorkType typeTravail) {
         this.typeTravail = typeTravail;
     }
 }
