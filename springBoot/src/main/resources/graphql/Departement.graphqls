@@ -1,4 +1,4 @@
-type Departement {
+type Departement{
     id: Long
     nom: String
     chef: ChefDepartement

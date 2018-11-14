@@ -1,4 +1,4 @@
-type Reclamation {
+type Reclamation{
     id: Long
     dateCreation: String
     materiel: Materiel

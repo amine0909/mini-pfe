@@ -7,7 +7,7 @@ type Query {
     AllMaterielsByChefDepart(chefDepartId: Long): [Materiel]
 }
 
-type Materiel {
+type Materiel  {
     id: Long
     nom: String
     marque: String
@@ -20,37 +20,6 @@ type Materiel {
 }
 
 
-type Reclamation {
-    id: Long
-    dateCreation: String
-    materiel: Materiel
-    chefDepartement: ChefDepartement
-}
 
-type ChefDepartement {
-    id: Long
-    nom: String
-    prenom: String
-    email: String
-    cin: Long
-    password: String,
-    departement: Departement,
-    reclamations: [Reclamation]
-
-}
-
-type Classe {
-    id: Long
-    nom: String
-    materiels: [Materiel]
-    departement: Departement
-}
-
-type Departement {
-    id: Long
-    nom: String
-    chef: ChefDepartement
-    classes: [Classe]
-}
 
 

@@ -27,7 +27,17 @@ public class GraphQlService {
     @Value("classpath:graphql/Materiel.graphqls")
     Resource resourceMateriel;
 
+    @Value("classpath:graphql/Reclamation.graphqls")
+    Resource resourceReclamation;
 
+    @Value("classpath:graphql/Departement.graphqls")
+    Resource resourceDepartement;
+
+    @Value("classpath:graphql/Classe.graphqls")
+    Resource resourceClasse;
+
+    @Value("classpath:graphql/ChefDepartement.graphqls")
+    Resource resourceChefDep;
 
     private GraphQL graphQL;
 
@@ -37,11 +47,25 @@ public class GraphQlService {
     // load schema at application start up
     @PostConstruct
     private void loadSchema() throws IOException {
+        SchemaParser schemaParser = new SchemaParser();
+        // get the schema
+        File schemaFileMateriel = this.resourceMateriel.getFile();
+        File schemaFileReclamation = this.resourceReclamation.getFile();
+        File schemaFileClasse = this.resourceClasse.getFile();
+        File schemaFileDepart = this.resourceDepartement.getFile();
+        File schemaFileChefDep = this.resourceChefDep.getFile();
         // parse schema
-        TypeDefinitionRegistry typeRegistry = new SchemaParser().parse(resourceMateriel.getFile());
+        //TypeDefinitionRegistry typeRegistry = new SchemaParser().parse(schemaFile);
+        TypeDefinitionRegistry typeDefinitionRegistry = new TypeDefinitionRegistry();
+        typeDefinitionRegistry.merge(schemaParser.parse(schemaFileMateriel));
+        typeDefinitionRegistry.merge(schemaParser.parse(schemaFileClasse));
+        typeDefinitionRegistry.merge(schemaParser.parse(schemaFileDepart));
+        typeDefinitionRegistry.merge(schemaParser.parse(schemaFileChefDep));
+        typeDefinitionRegistry.merge(schemaParser.parse(schemaFileReclamation));
 
-        RuntimeWiring wiring = buildRuntimeWiring();
-        GraphQLSchema schema = new SchemaGenerator().makeExecutableSchema(typeRegistry, wiring);
+
+        RuntimeWiring wiring = this.buildRuntimeWiring();
+        GraphQLSchema schema = new SchemaGenerator().makeExecutableSchema(typeDefinitionRegistry, wiring);
         graphQL = GraphQL.newGraphQL(schema).build();
     }
 
