@@ -10,9 +10,10 @@ import { NotificationsComponent }   from './notifications/notifications.componen
 import { UpgradeComponent }   from './upgrade/upgrade.component';
 import { ListProductsComponent } from './list-products/list-products.component';
 import { NgModule } from '@angular/core';
-import { ReclamationComponent } from './reclamation/reclamation.component';
 import { LoginComponent } from './login/login.component';
 import { AddReclamationComponent } from './add-reclamation/add-reclamation.component';
+import { ReclamationComponent } from './reclamation/reclamation.component';
+
 
 const AppRoutes: Routes = [
     {
@@ -67,7 +68,15 @@ const AppRoutes: Routes = [
     {
         path: "login",
         component: LoginComponent
-    }
+    },
+    {
+        path: "reclamations",
+        component: ReclamationComponent
+    },
+    {
+        path: 'admin/materials',
+        loadChildren: './admin/admin.module#AdminModule'
+    }   
     
 ]
 

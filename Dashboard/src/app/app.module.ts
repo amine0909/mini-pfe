@@ -12,7 +12,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatCardModule} from '@angular/material/card';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms'
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HttpClient } from '@angular/common/http'
 // import { NguiMapModule} from '@ngui/map';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -36,6 +36,12 @@ import { TemplateComponent } from './template/template.component';
 import { MaterielService } from './services/materiel.service';
 import { AddReclamationComponent } from './add-reclamation/add-reclamation.component';
 import { ModalListMaterielParCheDepComponent } from './modal-list-materiel-par-che-dep/modal-list-materiel-par-che-dep.component';
+import { ClassroomService } from './services/classroom.service';
+
+import { DepartementService } from './services/departement.service';
+
+import { SharedModule } from './shared/shared-module.module';
+
 
 @NgModule({
   declarations: [
@@ -68,11 +74,14 @@ import { ModalListMaterielParCheDepComponent } from './modal-list-materiel-par-c
     NavbarModule,
     FooterModule,
     FixedPluginModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
    // NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE'})
 
   ],
-  providers: [MaterielService],
+  providers: [MaterielService,ClassroomService,
+    DepartementService,
+    HttpClient],
   bootstrap: [AppComponent],
   entryComponents: [
     ModalAffectTechnicienComponent,

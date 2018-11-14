@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MaterielJob {
@@ -15,10 +16,32 @@ public class MaterielJob {
     @Autowired
     GraphQlService graphQlService;
 
+    @Autowired
+    private MaterielsRepository materielRepository;
 
     public ExecutionResult getAllMaterielsByChefDepart(String query) {
         ExecutionResult execute = this.graphQlService.getGraphQL().execute(query);
         return execute;
 
     }
+
+    /*BEGIN OUSSAMA WORK*/
+
+    public Materiel findMaterielById(Long id) {
+        Optional<Materiel> opt = this.materielRepository.findById(id);
+        if(opt.isPresent())
+            return  opt.get();
+        return  null;
+    }
+
+    public boolean updateMaterial(Materiel m,Long classId) {
+        try {
+            this.materielRepository.updateMaterial(m.getAdresseIp(), m.getCategorie(), m.getMarque(), m.getNom(), m.getNumSerie(),classId, m.getId());
+        }catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+     /*END OUSSAMA WORK*/
 }
