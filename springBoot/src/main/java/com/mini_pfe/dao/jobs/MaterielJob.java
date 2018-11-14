@@ -2,6 +2,8 @@ package com.mini_pfe.dao.jobs;
 
 import com.mini_pfe.dao.repositories.MaterielsRepository;
 import com.mini_pfe.entities.Materiel;
+import com.mini_pfe.services.GraphQlService;
+import graphql.ExecutionResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +13,12 @@ import java.util.List;
 public class MaterielJob {
 
     @Autowired
-    private MaterielsRepository materielRepository;
+    GraphQlService graphQlService;
 
 
-    public List<Materiel> getMateriels(long user_id) {
-       return this.materielRepository.findMateriels(user_id);
+    public ExecutionResult getAllMaterielsByChefDepart(String query) {
+        ExecutionResult execute = this.graphQlService.getGraphQL().execute(query);
+        return execute;
+
     }
 }

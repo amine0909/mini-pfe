@@ -14,9 +14,15 @@ public interface MaterielsRepository extends JpaRepository<Materiel, Long> {
             "JOIN departements d on (c.dep_id=d.dep_id)" +
             "JOIN users u on (u.dep_id=d.dep_id)" +
             "WHERE u.user_id=?1", nativeQuery = true)
-    List<Materiel> findMateriels(long user_id);
+    List<Materiel> findMaterielsByChefDepart(long user_id);
 
 
+    @Query(value = "SELECT * FROM materiels m " +
+            "JOIN classes c on (m.class_id=c.class_id)" +
+            "JOIN departements d on (c.dep_id=d.dep_id)" +
+            "JOIN users u on (u.dep_id=d.dep_id)" +
+            "WHERE u.user_id=?1", nativeQuery = true)
+    List<Materiel> getMateriels(long user_id);
 
 
     List<Materiel> findById(long id);

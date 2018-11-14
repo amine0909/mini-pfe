@@ -1,0 +1,6 @@
+type Classe {
+    id: Long
+    nom: String
+    materiels: [Material]
+    departement: Departement
+}

@@ -11,7 +11,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @EntityScan(basePackages = {"com.mini_pfe.entities"})
-@ComponentScan(basePackages = {"com.mini_pfe.controllers","com.mini_pfe.dao.jobs"})
+@ComponentScan(basePackages = {
+		"com.mini_pfe.controllers",
+		"com.mini_pfe.dao.jobs",
+		"com.mini_pfe.services",
+		"com.mini_pfe.services.Fetchers"
+})
 @EnableJpaRepositories(basePackages = "com.mini_pfe.dao.repositories")
 @SpringBootApplication
 public class ProjectApplication {

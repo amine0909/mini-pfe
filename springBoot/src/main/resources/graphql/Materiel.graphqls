@@ -1,0 +1,24 @@
+schema {
+    query:Query
+}
+
+
+type Query {
+    AllMaterielsByChefDepart(chefDepartId: Long): [Materiel]
+}
+
+type Materiel {
+    id: Long
+    nom: String
+    marque: String
+    numSerie: String
+    categorie: String
+    adresseIp: String
+    dateAchat: String
+    classe: Classe!
+    reclamation: Reclamation!
+}
+
+
+
+

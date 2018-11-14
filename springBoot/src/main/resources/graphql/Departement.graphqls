@@ -1,0 +1,6 @@
+type Departement {
+    id: Long
+    nom: String
+    chef: ChefDepartement
+    classes: [Classe]
+}

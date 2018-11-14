@@ -1,0 +1,6 @@
+type Reclamation {
+    id: Long
+    dateCreation: String
+    materiel: Materiel
+    chefDepartement: ChefDepartement
+}
