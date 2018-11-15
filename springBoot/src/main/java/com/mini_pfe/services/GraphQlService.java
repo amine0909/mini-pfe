@@ -19,8 +19,6 @@ import java.io.IOException;
 
 @Service
 public class GraphQlService {
-
-
     @Autowired
     private AllMaterielsByChefDepart allMaterielsByChefDepart;
 
