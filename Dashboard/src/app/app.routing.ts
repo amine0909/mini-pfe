@@ -54,15 +54,11 @@ const AppRoutes: Routes = [
         component: UpgradeComponent,   
     },
     {
-        path: 'products',
+        path: 'chefDep/products',
         component: ListProductsComponent
     },
     {
-        path: "reclamations",
-        component: ReclamationComponent
-    },
-    {
-        path: "add_reclamation",
+        path: "chefDep/add_reclamation",
         component: AddReclamationComponent
     },
     {

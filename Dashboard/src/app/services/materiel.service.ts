@@ -13,10 +13,14 @@ export class MaterielService {
     this.httpClient = _http;
   }
 
-  public getAllMaterielByChefDep(chefDepId): Observable<any> {
-    const GraphQlQuery  = '{AllMaterielsByChefDepart(chefDepartId: "1") {id nom marque numSerie categorie adresseIp  dateAchat classe {  id nom }} }'
-    return this._http.post("http://localhost:8080/materiels",GraphQlQuery);
+  public getAllMaterielByChefDep(chefDepId, query): Observable<any> {
+    return this._http.post("http://localhost:8080/api/chefDep/materiels",query);
   }
+
+
+
+
+
   getMaterielById(id: number) {
     this.httpClient.get(API_BASE_URL + "/materiel/" + id + "/get").subscribe(
       (data: Materiel) => {

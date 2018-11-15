@@ -13,6 +13,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatCardModule} from '@angular/material/card';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 import { HttpClientModule, HttpClient } from '@angular/common/http'
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 // import { NguiMapModule} from '@ngui/map';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -31,16 +33,18 @@ import { ReclamationComponent } from './reclamation/reclamation.component';
 import { ModalAffectTechnicienComponent } from './modal-affect-technicien/modal-affect-technicien.component';
 import { LoginComponent } from './login/login.component';
 import { TemplateComponent } from './template/template.component';
+import { AddReclamationComponent } from './add-reclamation/add-reclamation.component';
+import { ModalListMaterielParCheDepComponent } from './modal-list-materiel-par-che-dep/modal-list-materiel-par-che-dep.component';
+import { SnackBarAddReclamationComponent } from './snack-bar-add-reclamation/snack-bar-add-reclamation.component';
 
 // services
 import { MaterielService } from './services/materiel.service';
-import { AddReclamationComponent } from './add-reclamation/add-reclamation.component';
-import { ModalListMaterielParCheDepComponent } from './modal-list-materiel-par-che-dep/modal-list-materiel-par-che-dep.component';
 import { ClassroomService } from './services/classroom.service';
 
 import { DepartementService } from './services/departement.service';
 
 import { SharedModule } from './shared/shared-module.module';
+import { ReclamationService } from './services/reclamation.service';
 
 
 @NgModule({
@@ -60,7 +64,8 @@ import { SharedModule } from './shared/shared-module.module';
     LoginComponent,
     TemplateComponent,
     AddReclamationComponent,
-    ModalListMaterielParCheDepComponent
+    ModalListMaterielParCheDepComponent,
+    SnackBarAddReclamationComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -75,17 +80,21 @@ import { SharedModule } from './shared/shared-module.module';
     FooterModule,
     FixedPluginModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    MatSnackBarModule
    // NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE'})
 
   ],
-  providers: [MaterielService,ClassroomService,
+  providers: [MaterielService,
+    ClassroomService,
     DepartementService,
+    ReclamationService,
     HttpClient],
   bootstrap: [AppComponent],
   entryComponents: [
     ModalAffectTechnicienComponent,
-    ModalListMaterielParCheDepComponent
+    ModalListMaterielParCheDepComponent,
+    SnackBarAddReclamationComponent
   ]
 })
 export class AppModule { }

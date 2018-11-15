@@ -21,6 +21,15 @@ public class Reclamation {
     @Column(name = "DATE_CREATION")
     private Date dateCreation;
 
+
+    @Column(name = "objectif")
+    private String objectif;
+
+    @Lob
+    @Column(name = "description")
+    private String description;
+
+
     @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "MAT_ID")
@@ -80,5 +89,22 @@ public class Reclamation {
 
     public void setDateCreation(Date dateCreation) {
         this.dateCreation = dateCreation;
+    }
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getObjectif() {
+        return objectif;
+    }
+
+    public void setObjectif(String objectif) {
+        this.objectif = objectif;
     }
 }

@@ -19,11 +19,14 @@ public class MaterielJob {
     @Autowired
     private MaterielsRepository materielRepository;
 
+    /* amine work */
     public ExecutionResult getAllMaterielsByChefDepart(String query) {
         ExecutionResult execute = this.graphQlService.getGraphQL().execute(query);
         return execute;
 
     }
+
+    /* end amine work */
 
     /*BEGIN OUSSAMA WORK*/
 

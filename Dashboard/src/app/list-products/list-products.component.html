@@ -29,7 +29,6 @@
                                             <th>Adresse IP</th>
                                             <th>Date de l'achat</th>
                                             <th>Classe</th>
-                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -41,7 +40,6 @@
                                             <td>{{row.adresseIp}}</td>
                                             <td>{{row.dateAchat}}</td>
                                             <td>{{row.classe.nom}}</td>
-                                            <td><a class="btn btn-warning" [routerLink]="['/admin/materials/'+ row.id +'/edit']">modifier</a></td>
                                         </tr>
                                     </tbody>
                                 </table>

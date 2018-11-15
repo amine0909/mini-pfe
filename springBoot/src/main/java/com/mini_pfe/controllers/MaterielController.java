@@ -20,8 +20,8 @@ public class MaterielController {
     @Autowired
     private MaterielJob materielJob;
 
-
-    @RequestMapping(value="/materiels", method = RequestMethod.POST)
+    /* Begin amine */
+    @RequestMapping(value="/api/chefDep/materiels", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<Object> getMateriels(@RequestBody String query) {
         ExecutionResult result = this.materielJob.getAllMaterielsByChefDepart(query);
@@ -29,6 +29,9 @@ public class MaterielController {
                 .body(result);
 
     }
+
+    /* end amine work */
+
 
      /*BEGIN OUSSAMA METHODS*/
 
