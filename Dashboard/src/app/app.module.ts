@@ -70,8 +70,8 @@ import { SharedModule } from './shared/shared-module.module';
     MatCardModule,
     BrowserModule,
     AppRoutingModule,
-    SidebarModule,
-    NavbarModule,
+    /*SidebarModule,
+    NavbarModule,*/
     FooterModule,
     FixedPluginModule,
     ReactiveFormsModule,

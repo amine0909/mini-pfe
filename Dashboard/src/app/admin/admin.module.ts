@@ -7,16 +7,16 @@ import { SharedModule } from '../shared/shared-module.module';
 
 
 
+
 @NgModule({
-  imports: [
-    CommonModule,
-    AdminRoutingModule,
-    SharedModule
-  ],
-  declarations: [EditMaterialComponent, DeleteMaterialComponent]
+  imports: [CommonModule, AdminRoutingModule, SharedModule],
+  declarations: [
+    EditMaterialComponent,
+    DeleteMaterialComponent,
+  ]
 })
 export class AdminModule {
   constructor() {
     console.log("***Lazy Loaded AdminModule***");
   }
- }
+}
