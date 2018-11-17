@@ -10,15 +10,5 @@ import org.springframework.stereotype.Component;
 import java.util.Collection;
 @Component
 public class ReclamationResolver implements GraphQLResolver<Reclamation> {
-    public Materiel getMateriel(Reclamation reclamation) {
-        return reclamation.getMateriel();
-    }
 
-        public ChefDepartement getChefDepartement(Reclamation rec) {
-         return rec.getChefDepartement();
-        }
-
-        public Collection<Intervention> getInterventions(Reclamation rec) {
-        return  rec.getInterventions();
-        }
 }

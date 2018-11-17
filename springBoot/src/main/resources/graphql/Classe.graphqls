@@ -4,3 +4,7 @@ type Classe {
     materiels: [Materiel]
     departement: Departement!
 }
+
+extend type Query {
+ getAllClasses: [Classe]!
+}

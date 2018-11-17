@@ -18,7 +18,7 @@ type Materiel  {
     adresseIp: String
     dateAchat: String
     classe: Classe!
-    reclamations: [Reclamation]!
+    reclamations: [Reclamation]
 }
 
 type Mutation {

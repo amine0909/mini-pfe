@@ -10,6 +10,7 @@ import com.mini_pfe.entities.enums.Categorie;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedList;
 
 @Entity
 @Table(name="MATERIELS")
@@ -49,9 +50,9 @@ public class Materiel {
     private Classe classe;
 
 
-    @OneToMany(mappedBy = "materiel")
+    @OneToMany(mappedBy = "materiel",fetch = FetchType.EAGER)
     @JsonBackReference
-    private Collection<Reclamation> reclamations;
+    private Collection<Reclamation> reclamations = new LinkedList<>();
 
 
     public Collection<Reclamation> getReclamations() {

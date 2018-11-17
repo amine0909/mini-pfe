@@ -10,11 +10,5 @@ import java.util.Collection;
 @Component
 public class ClasseResolver implements GraphQLResolver<Classe> {
 
-    public Collection<Materiel> getMateriels(Classe classe) {
-        return classe.getMateriels();
-    }
 
-    public Departement getDepartement(Classe classe) {
-        return classe.getDepartement();
-    }
 }

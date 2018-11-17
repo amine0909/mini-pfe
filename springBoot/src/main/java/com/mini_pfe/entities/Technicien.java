@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.mini_pfe.entities.enums.WorkType;
 
 import javax.persistence.*;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -17,7 +18,7 @@ public class Technicien extends User {
 
     @JsonBackReference
     @OneToMany(mappedBy = "technicien")
-    private List<Intervention> interventions;
+    private List<Intervention> interventions = new LinkedList<>();;
 
     public Technicien() {}
 

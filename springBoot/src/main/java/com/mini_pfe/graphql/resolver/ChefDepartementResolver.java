@@ -10,11 +10,5 @@ import java.util.Collection;
 
 @Component
 public class ChefDepartementResolver implements GraphQLResolver<ChefDepartement>{
-    public Departement getDepartement(ChefDepartement chef) {
-        return chef.getDepartement();
-    }
 
-    public Collection<Reclamation> getReclamations(ChefDepartement chef) {
-        return chef.getReclamations();
-    }
 }

@@ -1,7 +1,9 @@
 package com.mini_pfe.graphql.resolver;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
+import com.mini_pfe.dao.repositories.ClassesRepository;
 import com.mini_pfe.dao.repositories.MaterielsRepository;
+import com.mini_pfe.entities.Classe;
 import com.mini_pfe.entities.Materiel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,6 +15,8 @@ import java.util.List;
 public class Query implements GraphQLQueryResolver {
     @Autowired
     private MaterielsRepository materielsRepository;
+    @Autowired
+    private ClassesRepository classesRepository;
 
     public List<Materiel> AllMaterielsByChefDepart(Long chefDepartId) {
         return  this.materielsRepository.findMaterielsByChefDepart(chefDepartId);
@@ -24,5 +28,9 @@ public class Query implements GraphQLQueryResolver {
 
     public List<Materiel> getMaterialsByClassroom(Long classroomId) {
         return this.materielsRepository.findByClasseId(classroomId);
+    }
+
+    public List<Classe> getAllClasses() {
+        return this.classesRepository.findAll();
     }
 }

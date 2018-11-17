@@ -8,7 +8,5 @@ import org.springframework.stereotype.Component;
 import java.util.Collection;
 @Component
 public class TechnicienResolver implements GraphQLResolver<Technicien> {
-   public Collection<Intervention> getInterventions(Technicien technicien) {
-       return technicien.getInterventions();
-   }
+
 }

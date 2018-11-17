@@ -9,16 +9,11 @@ import com.mini_pfe.entities.Reclamation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.List;
 
 @Component
 public class MaterielResolver implements GraphQLResolver<Materiel> {
-    public Classe getClasse(Materiel mat) {
-        return mat.getClasse();
-    }
 
-    public Collection<Reclamation> getReclamations(Materiel mat) {
-        return mat.getReclamations();
-    }
 }

@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import java.lang.annotation.Inherited;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.Set;
 
 @Entity
@@ -21,7 +22,7 @@ public class ChefDepartement extends  User {
 
     @JsonBackReference
     @OneToMany(mappedBy = "chefDepartement")
-    private Collection<Reclamation> reclamations;
+    private Collection<Reclamation> reclamations = new LinkedList<>();
 
     public ChefDepartement() {}
 

@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.LinkedList;
 
 @Entity
 @Table(name="RECLAMATIONS")
@@ -34,7 +35,7 @@ public class Reclamation {
 
     @JsonManagedReference
     @OneToMany(mappedBy = "reclamation")
-    private Collection<Intervention> interventions;
+    private Collection<Intervention> interventions = new LinkedList<>();;
 
 
     public Materiel getMateriel() {

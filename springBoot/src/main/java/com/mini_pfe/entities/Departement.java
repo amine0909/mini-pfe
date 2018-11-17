@@ -7,6 +7,7 @@ import com.mini_pfe.entities.enums.DepartementName;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.LinkedList;
 
 @Entity
 @Table(name="DEPARTEMENTS")
@@ -43,7 +44,7 @@ public class Departement {
 
     @OneToMany(mappedBy = "departement")
     @JsonBackReference
-    private Collection<Classe> classes;
+    private Collection<Classe> classes = new LinkedList<>();
 
     public Departement() {}
 

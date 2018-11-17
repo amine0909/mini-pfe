@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.LinkedList;
 
 @Entity
 @Table(name = "CLASSES")
@@ -54,7 +55,7 @@ public class Classe {
 
     @JsonBackReference
     @OneToMany(mappedBy = "classe")
-    private Collection<Materiel> materiels;
+    private Collection<Materiel> materiels = new LinkedList<>();
 
     @ManyToOne
     @JoinColumn(name = "DEP_ID")
