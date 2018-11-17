@@ -14,8 +14,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @ComponentScan(basePackages = {
 		"com.mini_pfe.controllers",
 		"com.mini_pfe.dao.jobs",
-		"com.mini_pfe.services",
-		"com.mini_pfe.services.Fetchers"
+		/*"com.mini_pfe.services",
+		"com.mini_pfe.services.Fetchers",*/
+		"com.mini_pfe.graphql.resolver"
 })
 @EnableJpaRepositories(basePackages = "com.mini_pfe.dao.repositories")
 @SpringBootApplication

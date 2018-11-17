@@ -3,7 +3,7 @@ package com.mini_pfe.controllers;
 import com.mini_pfe.dao.jobs.MaterielJob;
 import com.mini_pfe.entities.Materiel;
 import com.mini_pfe.entities.enums.Categorie;
-import com.mini_pfe.services.GraphQlService;
+//import com.mini_pfe.services.GraphQlService;
 import graphql.ExecutionResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +21,8 @@ public class MaterielController {
     private MaterielJob materielJob;
 
 
+    /*
+    old with old configuration
     @RequestMapping(value="/materiels", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<Object> getMateriels(@RequestBody String query) {
@@ -28,7 +30,7 @@ public class MaterielController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(result);
 
-    }
+    }*/
 
      /*BEGIN OUSSAMA METHODS*/
 
@@ -59,9 +61,5 @@ public class MaterielController {
             return  new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
         }
     }
-
-
-
-
    /*END OUSSAMA METHODS*/
 }

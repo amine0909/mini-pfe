@@ -34,6 +34,11 @@ public interface MaterielsRepository extends JpaRepository<Materiel, Long> {
     /*BEGIN OUSSAMA WORK*/
 
     //List<Materiel> findByClasseDepartementId(Long id);
+
+    List<Materiel> findByClasseDepartementId(Long depId);
+
+    List<Materiel> findByClasseId(Long classeId);
+
     @Modifying
     @Transactional
     @Query(value = "UPDATE Materiel m SET m.adresseIp=:ip,m.categorie=:cat,m.marque=:marque,m.nom=:nom,m.numSerie=:num,m.classe.id=:id_classe WHERE m.id=:id", nativeQuery = false)

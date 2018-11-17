@@ -7,5 +7,4 @@ type ChefDepartement {
     password: String,
     departement: Departement,
     reclamations: [Reclamation]
-
 }

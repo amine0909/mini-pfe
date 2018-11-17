@@ -2,5 +2,5 @@ type Classe {
     id: Long
     nom: String
     materiels: [Materiel]
-    departement: Departement
+    departement: Departement!
 }

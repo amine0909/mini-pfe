@@ -2,7 +2,7 @@ package com.mini_pfe.dao.jobs;
 
 import com.mini_pfe.dao.repositories.MaterielsRepository;
 import com.mini_pfe.entities.Materiel;
-import com.mini_pfe.services.GraphQlService;
+//import com.mini_pfe.services.GraphQlService;
 import graphql.ExecutionResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,18 +12,24 @@ import java.util.Optional;
 
 @Service
 public class MaterielJob {
-
-    @Autowired
-    GraphQlService graphQlService;
-
     @Autowired
     private MaterielsRepository materielRepository;
+    /*
+    required for old graphql work@Autowired
+    GraphQlService graphQlService;
 
     public ExecutionResult getAllMaterielsByChefDepart(String query) {
-        ExecutionResult execute = this.graphQlService.getGraphQL().execute(query);
+       ExecutionResult execute = this.graphQlService.getGraphQL().execute(query);
         return execute;
+    }*/
 
+
+    //new for replacing old
+    public List<Materiel> getAllMaterielsByChefDepart(Long chefId) {
+        return  this.materielRepository.findMaterielsByChefDepart(chefId);
     }
+
+    //end new
 
     /*BEGIN OUSSAMA WORK*/
 

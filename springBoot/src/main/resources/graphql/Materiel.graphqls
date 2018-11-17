@@ -5,6 +5,8 @@ schema {
 
 type Query {
     AllMaterielsByChefDepart(chefDepartId: Long): [Materiel]
+    getMaterialsByDepartement(departementId: ID!): [Materiel]!
+    getMaterialsByClassroom(classroomId: ID!): [Materiel]!
 }
 
 type Materiel  {
@@ -16,7 +18,11 @@ type Materiel  {
     adresseIp: String
     dateAchat: String
     classe: Classe!
-    reclamation: Reclamation!
+    reclamations: [Reclamation]!
+}
+
+type Mutation {
+   deleteMateriel(matId: ID!): Boolean
 }
 
 

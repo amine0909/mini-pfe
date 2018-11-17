@@ -3,4 +3,5 @@ type Reclamation{
     dateCreation: String
     materiel: Materiel
     chefDepartement: ChefDepartement
+    interventions : [Intervention]!
 }

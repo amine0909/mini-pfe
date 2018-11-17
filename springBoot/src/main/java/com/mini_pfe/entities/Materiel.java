@@ -54,8 +54,6 @@ public class Materiel {
     private Collection<Reclamation> reclamations;
 
 
-
-
     public Collection<Reclamation> getReclamations() {
         return reclamations;
     }

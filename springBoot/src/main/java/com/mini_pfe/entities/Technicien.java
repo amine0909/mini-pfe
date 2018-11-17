@@ -15,13 +15,9 @@ public class Technicien extends User {
     @Enumerated(EnumType.STRING)
     private WorkType typeTravail;
 
-    public List<Intervention> getInterventions() {
-        return interventions;
-    }
-
-    public void setInterventions(List<Intervention> interventions) {
-        this.interventions = interventions;
-    }
+    @JsonBackReference
+    @OneToMany(mappedBy = "technicien")
+    private List<Intervention> interventions;
 
     public Technicien() {}
 
@@ -29,9 +25,13 @@ public class Technicien extends User {
         return typeTravail;
     }
 
-    @JsonBackReference
-    @OneToMany(mappedBy = "technicien")
-    private List<Intervention> interventions;
+    public List<Intervention> getInterventions() {
+        return interventions;
+    }
+
+    public void setInterventions(List<Intervention> interventions) {
+        this.interventions = interventions;
+    }
 
     public void setTypeTravail(WorkType typeTravail) {
         this.typeTravail = typeTravail;
