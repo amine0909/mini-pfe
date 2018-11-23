@@ -19,3 +19,15 @@ export enum WorkType {
     TECHNI_RES = "TECHNI_RES",
     TECHNI_HRDW = "TECHNI_HRDW"
 }
+
+export function formatGraphQLParams(params :any[],query: string) {
+    for(let i=0; i<params.length;i++) {
+        if (typeof params[i] === 'object' && params[i]!==null) {
+            query += params[i]["n"]+ " {";
+            query = formatGraphQLParams(params[i]["v"], query)+ " } ";
+        }else{
+            query+= params[i] + " ";
+        }
+    }
+    return query;
+}

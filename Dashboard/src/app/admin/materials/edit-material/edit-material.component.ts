@@ -10,6 +10,7 @@ import { Classroom } from 'src/app/models/classroom.model';
 import { Location } from '@angular/common';
 import { MaterielService } from 'src/app/services/materiel.service';
 import { Subscription } from 'rxjs';
+import { formatGraphQLParams } from '../../../commons/common';
 
 declare const $: any;
 @Component({
@@ -26,6 +27,7 @@ export class EditMaterialComponent implements OnInit, OnDestroy {
   public classes: Array<Classroom> = [];
   public errorMessage = "";
   public classesPerDep = [];
+  public count=0;
 
   public departements: Array<Departement> = [];
   public material: Materiel;
@@ -47,7 +49,6 @@ export class EditMaterialComponent implements OnInit, OnDestroy {
     this.subscribeToMatSubject();
     this.subscribeToDepSubject();
     this.subscribeToClassSubject();
-    this.classService.getClassesOfDep(1);
   }
 
   ngOnDestroy() {
@@ -58,7 +59,9 @@ export class EditMaterialComponent implements OnInit, OnDestroy {
 
   getIdFromUrl() {
     this.activatedRoute.params.subscribe(params => {
-      this.matService.getMaterielById(+params["id"]);
+      const parameters = formatGraphQLParams(["id", "nom", "adresseIp", "categorie", "numSerie", "marque", { n: "classe", v: ["id","nom",{n:"departement",v:["id","nom"]}]}],"");
+      const q = '{"query":"{getMaterialById(matId: '+params["id"]+') {'+parameters +'}}"}';
+      this.matService.getMaterielById(q);
     });
   }
 
@@ -83,6 +86,8 @@ export class EditMaterialComponent implements OnInit, OnDestroy {
         this.material = emittedData;
         this.initForm(emittedData);
         this.idSelectedDep = this.material.classe.departement.id;
+        const obj = { DEP_ID: this.idSelectedDep, CLASSROOMS: [], isFilled: false};
+        this.classesPerDep.push(obj);
         this.classes.push(this.material.classe);
         this.formEditMat.controls["classe"].setValue(this.material.classe.id, {
           onlySelf: true
@@ -96,8 +101,9 @@ export class EditMaterialComponent implements OnInit, OnDestroy {
       (emittedData: Array<Classroom>) => {
         this.classes = emittedData;
         for (let i = 0; i < this.classesPerDep.length; i++) {
-          if (this.classesPerDep[i].DEP_ID == this.idSelectedDep) {
+          if (this.classesPerDep[i].DEP_ID == this.idSelectedDep && this.classesPerDep[i].isFilled===false) {
             this.classesPerDep[i].CLASSROOMS = this.classes;
+            this.classesPerDep[i].isFilled = true;
             $("#spinnerSalle").hide();
             $("#classe").attr("disabled", false);
             break;
@@ -144,36 +150,52 @@ export class EditMaterialComponent implements OnInit, OnDestroy {
     for (let i = 0; i < this.classesPerDep.length; i++) {
       if (this.classesPerDep[i].DEP_ID == this.idSelectedDep) {
         if (!this.classesPerDep[i].isFilled) {
-          this.classService.getClassesOfDep(+this.idSelectedDep);
+          const params = formatGraphQLParams(["id","nom"],""); 
+          const q = '{"query":"{getClassesByDepartement(id: ' + +this.idSelectedDep +') {' + params + '}}"}';
+          this.classService.getClassesOfDep(q);
           $("#spinnerSalle").show();
           $("#classe").attr("disabled", true);
-          this.classesPerDep[i].isFilled = true;
+          //this.classesPerDep[i].isFilled = true;
           break;
         } else {
+          console.log("error");
           this.classes = this.classesPerDep[i].CLASSROOMS;
         }
       }
     }
   }
 
-  /*onChangeClass(event) {}
-  fn2() { }*/
   fn1() {
-    //const params = new HttpParams().set("y","1").set("c","cc");
     if (!this.isSelectDepVisited) {
       $("#spinnerDept").show();
       $("#departement").attr("disabled", true);
       this.isSelectDepVisited = true;
-      this.depService.getDepartements();
+      const parameters = formatGraphQLParams(["id","nom"],"");
+      const q = '{"query":"{getAllDepartements{'+ parameters +'}}"}';
+      this.depService.getDepartements(q);
     }
   }
 
   fillArrayClassesPerDep() {
     let id_dep = null;
     for (let i = 0; i < this.departements.length; i++) {
-      id_dep = this.departements[i].id;
-      var obj = { DEP_ID: id_dep, CLASSROOMS: [], isFilled: false };
-      this.classesPerDep.push(obj);
+      if(!this.classesPerDep[i]) {
+        id_dep = this.departements[i].id;
+        var obj = { DEP_ID: id_dep, CLASSROOMS: [], isFilled: false };
+        this.classesPerDep.push(obj);
+      }
+    }
+  }
+
+  onClickClass(event) {
+    this.count++;
+    if (this.count == 1) {
+      $("#spinnerSalle").show();
+      $("#classe").attr("disabled", true);
+      const params = formatGraphQLParams(["id","nom"],"");
+      const q = '{"query":"{getClassesByDepartement(id: ' + this.idSelectedDep + ') {' + params + '}}"}';
+      //this.classesPerDep.push({ DEP_ID: this.idSelectedDep, CLASSROOMS: [], isFilled: false });
+      this.classService.getClassesOfDep(q);
     }
   }
 

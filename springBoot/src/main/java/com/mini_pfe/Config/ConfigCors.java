@@ -11,7 +11,7 @@ public class ConfigCors  extends WebMvcConfigurationSupport{
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/*")
                 .allowedOrigins("*")
-                .allowedMethods("GET", "POST", "OPTIONS", "PUT");
+                .allowedMethods("GET", "POST", "OPTIONS", "PUT").allowedHeaders("Authorization");
 
     }
 

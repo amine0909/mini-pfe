@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateInterventionComponent } from './create-intervention.component';
+import { CreateMaterialComponent } from './create-material.component';
 
-describe('CreateInterventionComponent', () => {
-  let component: CreateInterventionComponent;
-  let fixture: ComponentFixture<CreateInterventionComponent>;
+describe('CreateMaterialComponent', () => {
+  let component: CreateMaterialComponent;
+  let fixture: ComponentFixture<CreateMaterialComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateInterventionComponent ]
+      declarations: [ CreateMaterialComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateInterventionComponent);
+    fixture = TestBed.createComponent(CreateMaterialComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

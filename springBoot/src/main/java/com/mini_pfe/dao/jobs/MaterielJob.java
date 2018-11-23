@@ -33,11 +33,22 @@ public class MaterielJob {
 
     /*BEGIN OUSSAMA WORK*/
 
-    public Materiel findMaterielById(Long id) {
+
+    /*public Materiel findMaterielById(Long id) {
         Optional<Materiel> opt = this.materielRepository.findById(id);
         if(opt.isPresent())
             return  opt.get();
         return  null;
+    }*/
+
+    public boolean saveMateriel(Materiel m) {
+        try {
+            this.materielRepository.save(m);
+            return true;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return true;
+        }
     }
 
     public boolean updateMaterial(Materiel m,Long classId) {

@@ -14,10 +14,10 @@ export class DepartementService  {
         console.log('***ClassroomService Instanciated***');
     }
 
-    getDepartements() {
-        this.httpClient.get<Array<Departement>>(API_BASE_URL + "/admin/departements").subscribe(
-           (data: Array<Departement>) => {
-              this.departements = data;
+    getDepartements(query: string) {
+        this.httpClient.post(API_BASE_URL + "/graphql",query).subscribe(
+           (data) => {
+               this.departements = Array.from(data["data"]["getAllDepartements"]);
               this.emitDepartementsSubject();
            } , (error: HttpErrorResponse) =>{} 
         );

@@ -4,3 +4,9 @@ type Departement{
     chef: ChefDepartement!
     classes: [Classe]!
 }
+
+extend type Query {
+ getAllDepartements: [Departement]!
+ getDepartementById(id: ID!): Departement!
+}
+

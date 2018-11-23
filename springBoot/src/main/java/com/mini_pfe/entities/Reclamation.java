@@ -22,20 +22,42 @@ public class Reclamation {
     @Column(name = "DATE_CREATION")
     private Date dateCreation;
 
-    @JsonManagedReference
+
+    private String objectif;
+
+    public String getObjectif() {
+        return objectif;
+    }
+
+    public void setObjectif(String objectif) {
+        this.objectif = objectif;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Lob
+    private String description;
+
+    @JsonManagedReference(value = "materiel-reclamation1")
     @ManyToOne
     @JoinColumn(name = "MAT_ID")
     private Materiel materiel;
 
-    @JsonManagedReference
+    @JsonManagedReference(value = "reclamation-chef")
     @ManyToOne
     @JoinColumn(name = "CHEF_DEP_ID")
     private ChefDepartement chefDepartement;
 
 
-    @JsonManagedReference
+    @JsonManagedReference(value = "reclamation-intervention")
     @OneToMany(mappedBy = "reclamation")
-    private Collection<Intervention> interventions = new LinkedList<>();;
+    private Collection<Intervention> interventions = new LinkedList<>();
 
 
     public Materiel getMateriel() {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http'
+import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { Observable, Subject } from 'rxjs';
 import { Materiel } from '../models/material.model';
 import { API_BASE_URL } from '../commons/common';
@@ -8,19 +8,23 @@ import { API_BASE_URL } from '../commons/common';
 })
 export class MaterielService {
   public singleMatSub: Subject<Materiel> = new Subject<Materiel>();
+  public materialsSub:Subject<Materiel[]> = new Subject<Materiel[]>();
+  private materials: Materiel[] = [];
+
   private httpClient;
   constructor(private _http: HttpClient) { 
     this.httpClient = _http;
   }
 
-  public getAllMaterielByChefDep(chefDepId): Observable<any> {
-    const GraphQlQuery  = '{AllMaterielsByChefDepart(chefDepartId: "1") {id nom marque numSerie categorie adresseIp  dateAchat classe {  id nom }} }'
-    return this._http.post("http://localhost:8080/materiels",GraphQlQuery);
+  public getAllMaterielByChefDep(chefDepId, query): Observable<any> {
+    return this._http.post("http://localhost:8080/api/chefDep/materiels",query);
   }
-  getMaterielById(id: number) {
-    this.httpClient.get(API_BASE_URL + "/materiel/" + id + "/get").subscribe(
-      (data: Materiel) => {
-        this.emitSingleMatSub(data);
+/* oussama work */
+
+  getMaterielById(query: string) {
+    this.httpClient.post(API_BASE_URL+"/graphql",query).subscribe(
+      (data: any) => {
+        this.emitSingleMatSub(data['data']['getMaterialById']);
       }, (errorRep: HttpErrorResponse) => {
         if (errorRep.status === 404) {
           //record not found
@@ -42,6 +46,57 @@ export class MaterielService {
     });
   }
 
+  getMaterialsByDep(query: string) {
+    this.httpClient.post(API_BASE_URL + "/graphql", query).subscribe(
+      (data: any) => {
+        this.materials = data["data"]["getMaterialsByDepartement"];
+        this.emitMaterialsSub();
+      }, (errorRep: HttpErrorResponse) => {
+        if (errorRep.status === 404) {
+          //record not found
+        }
+      }
+    );
+  }
+
+
+  getMaterialsByQuery(query: string,invokedQueryName: string) {
+    this.httpClient.post(API_BASE_URL + "/graphql", query).subscribe(
+      (data: any) => {
+        this.materials = data["data"][invokedQueryName];
+        this.emitMaterialsSub();
+      }, (errorRep: HttpErrorResponse) => {
+        if (errorRep.status === 404) {
+          //record not found
+        }
+      }
+    );
+  }
+
+  getMaterialsByClass(query: string) {
+    this.httpClient.post(API_BASE_URL + "/graphql", query).subscribe(
+      (data: any) => {
+        this.materials = data["data"]["getMaterialsByClassroom"];
+        this.emitMaterialsSub();
+      }, (errorRep: HttpErrorResponse) => {
+        if (errorRep.status === 404) {
+          //record not found
+        }
+      }
+    );
+  }
+
+  saveMaterial(mat: any) {
+    return new Promise<Boolean>((resolve, reject) => {
+      this.httpClient.post(API_BASE_URL + "/materiels/save", mat).subscribe(
+        (successData) => {
+            resolve(true);
+        }, (error: HttpErrorResponse) => {
+            resolve(false);
+        }
+      )
+    });
+  }
 
   private handleError(erroResponse: HttpErrorResponse) {
     if (erroResponse.error instanceof ErrorEvent) {
@@ -51,7 +106,25 @@ export class MaterielService {
     }
   }
 
+  deleteMateriel(query: string) {
+    return new Promise<Boolean>((resolve, reject) => {
+       this.httpClient.post(API_BASE_URL + "/graphql",query).subscribe(
+         (emittedData) => {
+            resolve(true);
+         }, (error: HttpErrorResponse) => {
+            resolve(false);
+         }
+       );
+    });
+  }
+
   private emitSingleMatSub(materiel: Materiel) {
     this.singleMatSub.next(materiel);
   }
+
+  private emitMaterialsSub() {
+    this.materialsSub.next(this.materials.slice());
+  }
+
+  /*end oussama work */
 }

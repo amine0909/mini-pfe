@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.Future;
 import java.util.Date;
 
 @Entity
@@ -16,6 +17,7 @@ public class Intervention {
     private Long id;
 
     @Temporal(TemporalType.DATE)
+   //@Future
     @Column(name = "DATE_EXECUTION")
     private Date dateExecution;
 
@@ -40,13 +42,13 @@ public class Intervention {
 
     @ManyToOne
     @JoinColumn(name = "REC_ID")
-    @JsonBackReference
+    @JsonBackReference(value="reclamation-intervention1")
     private Reclamation reclamation;
 
 
     @ManyToOne
     @JoinColumn(name = "TECHNI_ID")
-    @JsonManagedReference
+    @JsonManagedReference(value="technicien-intervention")
     private Technicien technicien;
 
     public Intervention() {}

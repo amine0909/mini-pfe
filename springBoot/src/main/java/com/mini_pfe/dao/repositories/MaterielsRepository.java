@@ -33,11 +33,24 @@ public interface MaterielsRepository extends JpaRepository<Materiel, Long> {
 
     /*BEGIN OUSSAMA WORK*/
 
-    //List<Materiel> findByClasseDepartementId(Long id);
-
+    //par departement
     List<Materiel> findByClasseDepartementId(Long depId);
 
+    //par salle
     List<Materiel> findByClasseId(Long classeId);
+
+    //par categorie
+    List<Materiel> findByCategorie(Categorie categorie);
+
+
+    //par departement AND categorie
+     List<Materiel> findByClasseDepartementIdAndCategorie(Long depId,Categorie categorie);
+
+
+    //par classe AND categorie
+    List<Materiel> findByClasseIdAndCategorie(Long classId, Categorie categorie);
+
+    Materiel findByNumSerie(String numSerie);
 
     @Modifying
     @Transactional
@@ -47,5 +60,6 @@ public interface MaterielsRepository extends JpaRepository<Materiel, Long> {
             @Param("nom") String nom, @Param("num") String numSerie, @Param("id_classe")  Long classeId,
             @Param("id") Long id
     );
+
     /*END OUSSAMA WORK*/
 }

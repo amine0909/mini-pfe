@@ -17,11 +17,11 @@ public class ChefDepartement extends  User {
 
     @OneToOne
     @JoinColumn(name = "DEP_ID")
-    @JsonManagedReference
+    @JsonManagedReference(value = "departement-chef")
     private Departement departement;
 
-    @JsonBackReference
-    @OneToMany(mappedBy = "chefDepartement")
+    @JsonBackReference(value = "reclamation-chef1")
+    @OneToMany(mappedBy = "chefDepartement", fetch = FetchType.LAZY)
     private Collection<Reclamation> reclamations = new LinkedList<>();
 
     public ChefDepartement() {}

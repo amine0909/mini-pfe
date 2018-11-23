@@ -15,3 +15,12 @@
 .sidebar-wrapper {
     width: 274px!important
 }
+.successMessage {
+    background: #00b894!important;
+    color: white
+}
+
+.erreurMessage {
+    background: #d63031!important;
+    color: white
+}

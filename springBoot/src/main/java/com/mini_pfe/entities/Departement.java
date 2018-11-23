@@ -38,12 +38,12 @@ public class Departement {
     @Enumerated(EnumType.STRING)
     private DepartementName nom;
 
-    @JsonBackReference
+    @JsonBackReference(value = "departement-chef1")
     @OneToOne(mappedBy = "departement")
     private ChefDepartement chef;
 
     @OneToMany(mappedBy = "departement")
-    @JsonBackReference
+    @JsonBackReference(value = "classe-departement1")
     private Collection<Classe> classes = new LinkedList<>();
 
     public Departement() {}

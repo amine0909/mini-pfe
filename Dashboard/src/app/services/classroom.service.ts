@@ -10,11 +10,11 @@ export class ClassroomService {
    private classes: Array<Classroom> = [];
    constructor(private httpClient: HttpClient) {}
 
-   getClassesOfDep(id: number) {
-       this.httpClient.get<Array<Classroom>>(API_BASE_URL + "/admin/classes/" + id).subscribe(
-          (data: Array<Classroom>) => {
-             this.classes = data;
-             this.emitClassesPerDepSub();
+   getClassesOfDep(query: string) {
+       this.httpClient.post(API_BASE_URL + "/graphql" , query).subscribe(
+          (data) => {
+              this.classes = Array.from(data["data"]["getClassesByDepartement"]);
+              this.emitClassesPerDepSub();
           }, (errorRep: HttpErrorResponse) => {}
        );
    }

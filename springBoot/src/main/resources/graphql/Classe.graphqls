@@ -7,4 +7,6 @@ type Classe {
 
 extend type Query {
  getAllClasses: [Classe]!
+ getClasseById(id: ID!):Classe!
+ getClassesByDepartement(id: ID!):[Classe]!
 }

@@ -3,5 +3,11 @@ type Reclamation{
     dateCreation: String
     materiel: Materiel
     chefDepartement: ChefDepartement
+    objectif: String
+    description: String!
     interventions : [Intervention]!
+}
+
+extend type Query {
+   getNewReclamations: [Reclamation!]!
 }

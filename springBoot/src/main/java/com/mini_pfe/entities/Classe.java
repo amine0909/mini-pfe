@@ -53,13 +53,13 @@ public class Classe {
     }
 
 
-    @JsonBackReference
+    @JsonBackReference(value = "materiel-classe1")
     @OneToMany(mappedBy = "classe")
     private Collection<Materiel> materiels = new LinkedList<>();
 
     @ManyToOne
     @JoinColumn(name = "DEP_ID")
-    @JsonManagedReference
+    @JsonManagedReference(value = "classe-departement")
     private Departement departement;
 
     public Classe() {}

@@ -44,14 +44,14 @@ public class Materiel {
     @Column(name = "DATE_ACHAT")
     private Date dateAchat;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="CLASS_ID")
-    @JsonManagedReference
+    @JsonManagedReference(value = "materiel-classe")
     private Classe classe;
 
 
-    @OneToMany(mappedBy = "materiel",fetch = FetchType.EAGER)
-    @JsonBackReference
+    @OneToMany(mappedBy = "materiel",fetch = FetchType.LAZY)
+    @JsonBackReference(value = "materiel-reclamation")
     private Collection<Reclamation> reclamations = new LinkedList<>();
 
 

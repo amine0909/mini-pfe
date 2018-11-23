@@ -16,11 +16,24 @@ public class Technicien extends User {
     @Enumerated(EnumType.STRING)
     private WorkType typeTravail;
 
-    @JsonBackReference
-    @OneToMany(mappedBy = "technicien")
+    @Transient
+    private String key;
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    @JsonBackReference(value = "technicien-intervention")
+    @OneToMany(mappedBy = "technicien", fetch = FetchType.EAGER)
     private List<Intervention> interventions = new LinkedList<>();;
 
-    public Technicien() {}
+    public Technicien() {
+        this.key="";
+    }
 
     public WorkType getTypeTravail() {
         return typeTravail;
@@ -36,5 +49,14 @@ public class Technicien extends User {
 
     public void setTypeTravail(WorkType typeTravail) {
         this.typeTravail = typeTravail;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Technicien{" +
+                "typeTravail=" + typeTravail +
+                ", interventions=" + interventions +
+                '}';
     }
 }
